@@ -6,6 +6,11 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+// Handle root URL
+app.get('/', (req, res) => {
+    res.send('WebSocket server is running. Connect using ws://<your-server-url>');
+});
+
 wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         // Broadcast to all connected clients
@@ -17,8 +22,6 @@ wss.on('connection', (ws) => {
     });
 });
 
-// Use the port assigned by Vercel or 3000 as fallback
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log(`Signaling server is running on ws://localhost:${PORT}`);
+server.listen(process.env.PORT || 3000, () => {
+    console.log('Signaling server is running');
 });
