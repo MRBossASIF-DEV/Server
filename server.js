@@ -17,6 +17,8 @@ wss.on('connection', (ws) => {
     });
 });
 
-server.listen(3000, () => {
-    console.log('Signaling server is running on ws://localhost:3000');
+// Use the port assigned by Vercel or 3000 as fallback
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Signaling server is running on ws://localhost:${PORT}`);
 });
